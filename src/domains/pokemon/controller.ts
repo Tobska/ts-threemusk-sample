@@ -1,12 +1,15 @@
 import { Request, Response } from "express";
 import { logger } from "../../logger";
+import { PokemonService } from "./service";
 
 export class PokemonController {
-    constructor () {}
+  constructor(private pokemonService: PokemonService) {}
 
-    getPokemon = async (req: Request, res: Response): Promise<void> => {
-        logger.info("POKEMON");
+  getPokemon = async (req: Request, res: Response): Promise<void> => {
+    const { id } = req.params;
 
-        res.json({ pokemon: 1 })
-    };
+    const pokemon = await this.pokemonService.getPokemon(Number(id));
+
+    res.json(pokemon);
+  };
 }
