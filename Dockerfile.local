@@ -1,0 +1,4 @@
+FROM node:lts-alpine3.19
+
+# Install make
+RUN apk add --no-cache make

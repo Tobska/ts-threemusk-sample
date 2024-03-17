@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  node-local:
+    build:
+      context: .
+      dockerfile: Dockerfile.local
+    image: node-local
+    volumes:
+      - .:/code:cached
+    working_dir: /code
+    ports:
+      - "4000:${API_PORT:-4000}"
+    env_file: .env
+
+  postgres:
+    image: postgres:14-alpine
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD", "pg_isready"]
+      interval: 2s
+      retries: 5
+    environment:
+      POSTGRES_DB: sample_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
