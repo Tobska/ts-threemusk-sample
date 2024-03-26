@@ -24,6 +24,6 @@ services:
       interval: 2s
       retries: 5
     environment:
-      POSTGRES_DB: sample_db
+      POSTGRES_DB: root
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
