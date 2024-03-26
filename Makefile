@@ -1,3 +1,13 @@
+.PHONY: _checkNodeVersion
+_checkNodeVersion:
+	node --version
+
+.PHONY: checkNodeVersion
+checkNodeVersion:
+	docker compose run --rm node-local make _checkNodeVersion
+
+###
+
 .PHONY: _deps
 _deps:
 	npm install
